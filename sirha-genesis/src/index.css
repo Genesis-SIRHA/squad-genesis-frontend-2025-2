@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .card {
-        @apply bg-white rounded-lg shadow p-4;
-    }
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    border: 0.5px solid #b3b3b3;
 }

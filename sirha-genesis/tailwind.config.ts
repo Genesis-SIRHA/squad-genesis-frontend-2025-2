@@ -9,30 +9,50 @@ const config: Config = {
         extend: {
             backgroundImage: {
                 'pattern': "url('/background-sirha-degradate.svg')"
-              },
-              backgroundSize: {
+            },
+            backgroundSize: {
                 'pattern-size': 'cover',
-              },
-              backgroundOpacity: {
+            },
+            backgroundOpacity: {
                 '10': '0.1',
-              },
+            },
 
             colors: {
                 primary: {
                     DEFAULT: '#f45356',
                     hover: '#e73858',
                 },
-
                 'font-neutral': {
                     primary: 'var(--font-neutral-primary)',
-                }
-            },
-            spacing: {
-                '2px': '2px',
+                    secondary: 'var(--font-neutral-secondary)'
+                },
             }
         },
-    },
-    plugins: [],
-} satisfies Config;
+            spacing: {
+                '2px': '2px',
+            },
+
+            margin: {
+                'sm': '6px',
+                'md': '16px',
+                'lg': '24px',
+                'xl': '32px'
+            },
+
+            padding:{
+                'sm': '6px',
+                'md': '12px',
+                'lg': '16px',
+                'xl': '24px'
+            },
+
+            borderRadius:{
+                'sm': '5px',
+                'md': '16px',
+                'lg': '24px'
+            }
+        },
+        plugins: [],
+    } satisfies Config;
 
 export default config;

@@ -13,9 +13,9 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 
 root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
+    <StrictMode>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </StrictMode>
 );

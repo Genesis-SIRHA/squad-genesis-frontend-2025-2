@@ -57,7 +57,7 @@ const LoginForm = (): JSX.Element => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container>
       <Paper 
         elevation={3} 
         sx={{
@@ -68,12 +68,6 @@ const LoginForm = (): JSX.Element => {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <LockOutlined />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Iniciar sesión
-        </Typography>
         
         {error && (
           <Alert severity="error" sx={{ width: '100%', mt: 2 }}>
