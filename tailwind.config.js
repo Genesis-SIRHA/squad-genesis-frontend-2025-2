@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
-
+/** @type {import('tailwindcss').Config} */
+/* jshint esversion: 6 */
 export default {
     content: [
         "./index.html",
@@ -7,16 +7,24 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                'title': ['AlexanaNeue', 'sans-serif'],
+            },
             backgroundImage: {
                 'pattern': "url('/src/assets/images/login-bg.jpg')",
                 'customGradient': 'linear-gradient(135deg, #F26E35 0%, #F45356 50%, #E73858 100%)'
+            },
+            width: {
+                'login-container': '30vw',
+                'form-section': '20vw',
+                'input-field': '10vw'
             },
             colors: {
                 primary: {
                     light: '#F26E35',
                     mid: '#F45356',
                     dark: '#E73858',
-                    black: '#262626',
+                    mate: '#262626',
                     smoke: '#F2F2F2',
                 },
                 secondary: {
@@ -25,17 +33,10 @@ export default {
                     neutral: '#d1d1d1',
                 },
             },
-            fontFamily: {
-                sans: ['Inter var', 'sans-serif'],
-            },
-            spacing: {
-                128: '32rem',
-                144: '36rem',
-            },
             borderRadius: {
                 '4xl': '2rem',
             },
         },
     },
     plugins: [],
-} satisfies Config;
+};
