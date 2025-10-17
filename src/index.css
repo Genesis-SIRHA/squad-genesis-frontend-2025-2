@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: 'AlexanaNeue';
+    src: url('/public/fonts/AlexanaNeue.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.bg-pattern {
+    background: url('/public/images/login-bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-customGradient {
+    background: linear-gradient(135deg, #F26E35 0%, #F45356 50%, #E73858 100%);
+}
+
+.text-primary-mate {
+    color: #262626;
+}
+
+.text-primary-mid {
+    color: #F45356;
+}
+
+.bg-primary-smoke {
+    background-color: #F2F2F2;
+}
+
+.bg-primary-dark {
+    background-color: #E73858;
+}
+
+.bg-primary-mid {
+    background-color: #F45356;
+}
+
+.text-secondary-mid{
+    color: #f8777a;
+}
+
+.form-container {
+    width: 20vw;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    margin: 5vw;
+}
+
+.font-title{
+    font-family: 'AlexanaNeue', sans-serif;
+    font-size: 5vw;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #F26E35 0%, #F45356 50%, #E73858 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.ring-primary-mid {
+    --tw-ring-color: #262626;
+}
+
