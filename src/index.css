@@ -16,7 +16,7 @@ html, body, #root {
     padding: 0;
 }
 
-p{
+p {
     margin: 0;
     padding: 0;
 }
@@ -39,9 +39,16 @@ p{
 .text-primary-mid {
     color: #F45356;
 }
+.text-primary-dark {
+    color: #E73858;
+}
 
 .bg-primary-smoke {
     background-color: #F2F2F2;
+}
+
+.bg-foreground {
+    background: radial-gradient(circle,#E8D0C8 0%, #E0E0E0 100%);
 }
 
 .bg-primary-dark {
@@ -54,6 +61,10 @@ p{
 
 .text-secondary-mid{
     color: #f8777a;
+}
+
+.text-foreground{
+    color: #595959;
 }
 
 .form-container {
