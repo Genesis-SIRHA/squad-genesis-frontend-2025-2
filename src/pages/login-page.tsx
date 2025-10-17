@@ -9,7 +9,7 @@ const LoginPage: React.FC = () => {
                     <div className="w-2/5 p-6 pt-24 my-6 mx-10 login-container flex flex-col items-center bg-primary-smoke gap-4">
                         <p className="text-primary-mate text-2xl font-title text-gradient">Sirha</p>
                         <p className="text-primary-mate text-2xl font-bold">Login</p>
-                        <div className="w-full space-y-4 form-container">
+                        <div className="w-full flex flex-col items-center space-y-4 form-container">
                             <form className="flex flex-col items-center width-field">
                                 <div className="w-full flex flex-row gap-2 w-input-field my-4 items-center">
                                     <User strokeWidth={3} className="w-8 h-8 text-primary-mid"/>
@@ -29,11 +29,13 @@ const LoginPage: React.FC = () => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-2/3 p-3 bg-customGradient text-white font-bold rounded-lg hover:bg-primary-mid transition-colors duration-300"
+                                    className="w-2/3 p-4 my-6 bg-customGradient text-white font-bold rounded-lg hover:bg-primary-mid transition-colors duration-300"
                                 >
                                     Login
                                 </button>
                             </form>
+                            <p className="text-primary-mate text-sm">Don't have an account? <a href="#" className="text-primary-mid">Sign Up</a></p>
+                            <p className="text-primary-mate text-sm">Forgot Password? <a href="#" className="text-primary-mid">Reset Password</a></p>
                         </div>
                     </div>
                     <div className="w-3/5 bg-pattern bg-cover bg-center rounded-4xl flex items-center justify-center">

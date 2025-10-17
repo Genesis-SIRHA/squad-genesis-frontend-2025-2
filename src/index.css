@@ -16,6 +16,11 @@ html, body, #root {
     padding: 0;
 }
 
+p{
+    margin: 0;
+    padding: 0;
+}
+
 .bg-pattern {
     background: url('/public/images/login-bg.svg');
     background-size: cover;
