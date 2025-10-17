@@ -1,9 +1,10 @@
-import LoginPage from "./pages/login-page.tsx";
+import DashBoard from "./pages/dashboard-page.tsx";
+
 
 function App() {
   return (
     <div className="min-h-screen">
-      <LoginPage/>
+      <DashBoard/>
     </div>
   )
 }
