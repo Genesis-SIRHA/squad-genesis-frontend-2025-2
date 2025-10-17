@@ -1,9 +1,10 @@
-function App() {
+import LoginPage from "./pages/login-page.tsx";
 
+function App() {
   return (
-    <>
-     <h1 className="text-3xl">Hola mundo :D</h1>
-    </>
+    <div className="min-h-screen">
+      <LoginPage/>
+    </div>
   )
 }
 

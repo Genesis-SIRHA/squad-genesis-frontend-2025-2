@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.node.json",
+  "compilerOptions": {
+    "moduleResolution": "node16",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["tailwind.config.ts"]
+}
