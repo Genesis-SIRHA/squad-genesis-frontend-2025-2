@@ -1,4 +1,14 @@
-const DashBoard: React.FC = () => {
+import useRequestByUserId from "./hooks/useRequestById.ts";
+import RequestFlag from "./components/RequestFlag.tsx";
+
+const DashBoard = () => {
+    const userId = "A123456789";
+    const {requests, loading} = useRequestByUserId(userId);
+
+    if (loading){
+        return <div>Loading...</div>
+    }
+
     return (
         <div className="flex flex-row h-full w-full">
             <div className="flex flex-col px-12 pt-6 h-full w-full gap-8">
@@ -12,6 +22,17 @@ const DashBoard: React.FC = () => {
                         <p className="text-primary-mate font-bold w-1/6">Fecha</p>
                         <p className="text-primary-mate font-bold w-1/6">Estado</p>
                     </div>
+
+                    <div className="px-12 py-4 space-y-2">
+                        {requests && requests.length > 0 ? (
+                            requests.map((request) => (
+                                <RequestFlag request={request} />
+                            ))
+                        ) : (
+                            <p className="text-center py-4">No hay solicitudes disponibles</p>
+                        )}
+                    </div>
+
                 </div>
             </div>
         </div>
