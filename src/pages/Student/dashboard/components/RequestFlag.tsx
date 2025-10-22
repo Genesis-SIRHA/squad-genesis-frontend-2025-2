@@ -1,14 +1,7 @@
 import React from 'react';
 import type {Request} from '../schemas/RequestSchema';
 
-interface RequestFlagProps extends Request {}
-
-const RequestFlag: React.FC<RequestFlagProps> = (props) => {
-  const {
-    studentId,
-    status,
-    createdAt,
-  } = props;
+const RequestFlag: = () => {
 
   const course = getCourseById(studentId);
 
