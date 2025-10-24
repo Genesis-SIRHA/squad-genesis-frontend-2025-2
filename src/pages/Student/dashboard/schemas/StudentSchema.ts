@@ -8,8 +8,8 @@ export const StudentSchema = Zod.object({
     fullName: Zod.string(),
     plan: Zod.string(),
     facultyName: Zod.string(),
-    generalAverage: Zod.string(),
+    generalAverage: Zod.number(),
     academicGrade: Zod.string(),
-})
+});
 
 export type Student = Zod.infer<typeof StudentSchema>

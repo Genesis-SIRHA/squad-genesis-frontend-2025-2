@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {type Student, StudentSchema} from '../schemas';
 
-interface ApiResponse {
-    data: Student;
-}
-
-export const useRequestByUserId = (studentId: string) => {
+export const useStudentByUserId = (studentId: string) => {
     const [student, setStudent] = useState<Student | null >(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -14,11 +10,17 @@ export const useRequestByUserId = (studentId: string) => {
         const fetchRequest = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get<ApiResponse>(`http://localhost:8080/api/student/${studentId}`);
-                const validatedData = StudentSchema.parse(response.data.data);
+                const response = await axios.get<Student>(`/api/student/${studentId}`);
+                const validatedData = StudentSchema.parse(response.data);
                 setStudent(validatedData);
-            } catch {
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.error("Axios error:", error.response?.data || error.message);
+                } else {
+                    console.error("Unexpected error:", error);
+                }
                 setStudent(null);
+
             } finally {
                 setLoading(false);
             }
@@ -29,8 +31,8 @@ export const useRequestByUserId = (studentId: string) => {
     const refetch = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<ApiResponse>(`http://localhost:8080/api/student/${studentId}`);
-            const validatedData = StudentSchema.parse(response.data.data);
+            const response = await axios.get<Student>(`http://localhost:8080/api/student/${studentId}`);
+            const validatedData = StudentSchema.parse(response.data);
             setStudent(validatedData);
         } catch {
             setStudent(null);
@@ -42,4 +44,4 @@ export const useRequestByUserId = (studentId: string) => {
     return {student, loading, refetch};
 };
 
-export default useRequestByUserId;
+export default useStudentByUserId;

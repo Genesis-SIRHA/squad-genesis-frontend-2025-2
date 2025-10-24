@@ -1,2 +1,4 @@
 export * from "./RequestSchema"
-export * from "./StudentSchema"
+export * from "./StudentSchema.ts"
+export * from "./CourseSchema.ts"
+export * from "./GroupSchema.ts"

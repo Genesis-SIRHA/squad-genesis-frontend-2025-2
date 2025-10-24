@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen w-full bg-pattern flex items-center justify-center">
+        <div className="min-h-screen w-full bg-pattern-big flex items-center justify-center">
             <div className="w-full h-full flex items-center justify-center">
                 <div className="bg-primary-mate flex flex-row rounded-4xl shadow-lg bg-primary-smoke">
                     <div className="w-2/5 p-6 pt-24 my-6 mx-10 login-container flex flex-col items-center bg-primary-smoke gap-4">
@@ -97,7 +97,7 @@ const LoginPage: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="w-3/5 bg-pattern bg-cover bg-center rounded-4xl flex items-center justify-center">
+                    <div className="w-3/5 bg-pattern-big bg-cover bg-center rounded-4xl flex items-center justify-center">
                         <div className="bg-customGradient bg-opacity-40 w-full h-full py-24 rounded-4xl flex items-center justify-center">
                             <img src="/public/images/login-decorator.svg" alt="Login Decorator" />
                         </div>
