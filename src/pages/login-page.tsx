@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { User, Lock } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const LoginPage: React.FC = () => {
+    const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -24,8 +26,9 @@ const LoginPage: React.FC = () => {
                 throw new Error(errorText || "Login failed");
             }
 
-            const result = await response.text();
+            const result = await response.json();
             console.log("✅ Login success:", result);
+            login(result.token, result.user);
             alert("Login success!");
         } catch (err: any) {
             console.error("❌ Login error:", err);
