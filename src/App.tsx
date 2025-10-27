@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {Navbar, Header} from './components';
+import { Navbar, Header } from './components';
 import DashBoard from "./pages/Student/dashboard/StudentDashboard.tsx";
 
 function App() {
     return (
         <Router>
-            <div className="flex min-h-screen bg-pattern-foreground">
-                <Navbar/>
-                <div className="flex-1 min-h-screen flex flex-col">
-                    <Header/>
-                    <main className="flex-1 overflow-auto mr-4 mb-4 p-4 rounded-4xl bg-foreground">
-                        <Routes>
-                            <Route path="/dashboard" element={<DashBoard/>}/>
-                        </Routes>
+            <div className="flex h-screen bg-pattern-foreground overflow-hidden">
+                <Navbar />
+                <div className="flex-1 flex flex-col min-w-0">
+                    <Header />
+                    <main className="flex-1 mr-4 mb-4 rounded-4xl bg-foreground overflow-auto">
+                        <div className="h-full w-full">
+                            <Routes>
+                                <Route path="/dashboard" element={<DashBoard />} />
+                            </Routes>
+                        </div>
                     </main>
                 </div>
             </div>
@@ -21,4 +23,3 @@ function App() {
 }
 
 export default App;
-    

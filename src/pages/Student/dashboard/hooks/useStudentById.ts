@@ -3,7 +3,7 @@ import axios from 'axios';
 import {type Student, StudentSchema} from '../schemas';
 
 export const useStudentByUserId = (studentId: string) => {
-    const [student, setStudent] = useState<Student | null >(null);
+    const [student, setStudent] = useState<Student | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {

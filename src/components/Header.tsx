@@ -15,8 +15,6 @@ export const Header = () =>{
                 <img className="w-12" src="public/images/user-profile.svg" alt="basic_user_foto" />
             </div>
 
-
-
         </header>
     );
 };
