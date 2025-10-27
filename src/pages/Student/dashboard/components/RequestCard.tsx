@@ -1,9 +1,9 @@
 import {type Request, RequestStatus} from '../schemas';
 import {ChevronDown, SendHorizonal} from "lucide-react";
-import useCourseByGroupCode from "../hooks/useCourseByGroupCode.ts";
-import useStudentById from "../hooks/useStudentById.ts";
+import useCourseByGroupCode from "../../../../hooks/useCourseByGroupCode.ts";
+import useStudentById from "../../../../hooks/useStudentById.ts";
 import {DropdownMenu} from "@/lib";
-import useFacultyByNameAndPlan from "@/pages/Student/dashboard/hooks/useFacultyByNameAndPlan.ts";
+import useFacultyByNameAndPlan from "@/hooks/useFacultyByNameAndPlan.ts";
 import ScheduleView from "@/pages/Student/dashboard/components/ScheduleView.tsx";
 import PemsumView from "@/pages/Student/dashboard/components/PemsumView.tsx";
 import {useState} from "react";
@@ -72,7 +72,7 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
 
     return (
         <div className="flex flex-col">
-            <div className={`flex flex-row pl-4 pr-8 py-2 border border-gray-100 bg-white shadow-sm items-center duration-200 ${isActive ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+            <div className={`flex flex-row pl-4 pr-8 py-2 border border-gray-100 bg-white shadow-sm items-center duration-500 ${isActive ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
                 <button
                     onClick={onToggle}
                     className={`rounded-full text-primary-mid p-2 transform transition-transform ${isActive ? 'rotate-180' : ''}`}>
@@ -94,7 +94,7 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                     </div>
                 </div>
             </div>
-            <div className={`overflow-hidden transition-all duration-500 ${isActive ? '' : 'max-h-0'}`}>
+            <div className={`overflow-hidden transform transition-all duration-500 ${isActive ? '' : 'max-h-0'}`}>
                 <div className="border border-gray-100 rounded-b-2xl rounded-t-0 bg-white shadow-sm">
                     <main className="flex flex-row gap-12 py-6 px-18">
                         <div className="flex flex-col w-1/2">
@@ -116,35 +116,6 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                                         disabled={!editable}
                                     />
                                 </div>
-
-                                {request.type === "SWAP" && (
-                                    <div className="flex flex-row gap-5">
-                                        <div className="flex flex-col w-1/2">
-                                            <p className="font-bold">Clase en Catalogo:</p>
-                                            <DropdownMenu
-                                                options={courseOptions}
-                                                selected={request.type}
-                                                onSelect={(value) => {
-                                                    if (request.originGroupId !== undefined) {
-                                                        request.originGroupId = value;
-                                                    } else if (request.destinationGroupId !== undefined) {
-                                                        request.destinationGroupId = value;
-                                                    }
-                                                }}
-                                                disabled={!editable}
-                                            />
-                                        </div>
-                                        <div className="flex flex-col w-1/2">
-                                            <p className="font-bold">Grupo:</p>
-                                            <DropdownMenu
-                                                options={requestTypeOptions}
-                                                selected={request.type.toString()}
-                                                onSelect={(value) => request.type = value as RequestStatus}
-                                                disabled={!editable}
-                                            />
-                                        </div>
-                                    </div>
-                                )}
                                 <div className="flex flex-row gap-5">
                                     <div className="flex flex-col w-1/2">
                                         <p className="font-bold">Clase en Catalogo:</p>

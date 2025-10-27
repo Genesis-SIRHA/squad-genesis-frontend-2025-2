@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {type Course, CourseSchema} from '../schemas';
+import {type Course, CourseSchema} from '../pages/Student/dashboard/schemas';
 
 
 export const useCourseByCourseAbbreviation = (CourseAbbreviation: string) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {type Request, RequestSchema} from '../schemas';
+import {type Request, RequestSchema} from '../pages/Student/dashboard/schemas';
 
 export const useRequestByUserId = (userId: string, role: string) => {
     const [requests, setRequest] = useState<Request[]>([]);

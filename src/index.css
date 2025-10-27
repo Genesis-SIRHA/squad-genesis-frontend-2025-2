@@ -32,6 +32,11 @@ span{
     scrollbar-color: #F45356 #f3f3f3;
 }
 
+.glass {
+    background: rgba(229, 106, 106, 0.24);
+    backdrop-filter: blur(2px);
+}
+
 .bg-pattern-big {
     background: url('/public/images/pattern-bg-big.svg');
     background-size: cover;
@@ -113,10 +118,6 @@ span{
     color: #757575;
 }
 
-.form-container {
-    width: 20vw;
-}
-
 .img {
     width: 100%;
     height: 100%;
@@ -125,7 +126,6 @@ span{
 
 .font-title{
     font-family: 'AlexanaNeue', sans-serif;
-    font-size: 5vw;
 }
 
 .text-gradient {

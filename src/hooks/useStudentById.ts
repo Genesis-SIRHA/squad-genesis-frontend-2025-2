@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {type Student, StudentSchema} from '../schemas';
+import {type Student, StudentSchema} from '../pages/Student/dashboard/schemas';
 
 export const useStudentByUserId = (studentId: string) => {
     const [student, setStudent] = useState<Student | null>(null);

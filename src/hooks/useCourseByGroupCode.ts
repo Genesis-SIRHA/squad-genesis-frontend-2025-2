@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {type Course, CourseSchema} from "../schemas";
+import {type Course, CourseSchema} from "../pages/Student/dashboard/schemas";
 
 export const useGroupByGroupCode = (GroupCode: string ) => {
     const [Course, setCourse] = useState<Course|null>(null);
