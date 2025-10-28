@@ -5,6 +5,7 @@ import LoginPage from './pages/login-page';
 import {ProtectedRoute} from './components/ProtectedRoute';
 import {AuthProvider} from './context/AuthProvider';
 import {ToastContainer} from "react-toastify";
+import Pensum from "@/pages/Student/Pensum/Pensum.tsx";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                                         <div className="h-full w-full">
                                             <Routes>
                                                 <Route path="/dashboard" element={<DashBoard/>}/>
+                                                <Route path="/pensum" element={<Pensum/>}/>
                                                 <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
                                             </Routes>
                                         </div>

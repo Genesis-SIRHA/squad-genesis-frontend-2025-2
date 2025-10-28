@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {type Faculty, FacultySchema} from "@/pages/Student/dashboard/schemas/FacultySchema.ts";
+import {type Faculty, FacultySchema} from "@/schemas/FacultySchema.ts";
 import apiClient from "@/lib/interceptors/apiClient.ts";
 
 const useFacultyByNameAndPlan = (facultyName: string, plan: string) => {

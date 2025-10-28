@@ -12,7 +12,7 @@ export const Navbar = () => {
 
     const navItems = [
         { path: '/dashboard', label: 'Dashboard', icon: SquareCheck },
-        { path: '/', label: 'Group Tracker', icon: Calendar },
+        { path: '/pensum', label: 'Group Tracker', icon: Calendar },
         { path: '/stats', label: 'Stats', icon: ChartColumnBig },
         { path: '/perfil', label: 'Settings', icon: Settings },
     ];
