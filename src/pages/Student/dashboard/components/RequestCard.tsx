@@ -15,15 +15,16 @@ interface RequestCardProps {
     editable: boolean
 }
 
-const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) => {
+const RequestCard = ({request, isActive, onToggle, editable}: RequestCardProps) => {
     const [viewSchedule, setViewSchedule] = useState(true);
     const groupCode = request.originGroupId || request.destinationGroupId || "";
     const course = useCourseByGroupCode(groupCode);
     const student = useStudentById(request.studentId);
 
-    const faculty = student.student?.facultyName || "";
-    const plan = student.student?.plan || "";
+    const faculty = student.student?.facultyName;
+    const plan = student.student?.plan;
 
+    console.log(request)
 
     const formatDate = (date: Date | string) => {
         return new Date(date).toLocaleDateString('es-ES', {
@@ -54,25 +55,31 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
     };
 
     const datosHorario = [
-        { day: 'lunes', slot: 3},
-        { day: 'miércoles', slot: 5},
-        { day: 'viernes', slot: 2},
+        {day: 'lunes', slot: 3},
+        {day: 'miércoles', slot: 5},
+        {day: 'viernes', slot: 2},
     ];
 
     const requestTypeOptions = [
-        { label: 'Intercambio', value: "SWAP"},
-        { label: 'Cancelacion', value: "CANCELLATION"},
-        { label: 'Inscripcion', value: "JOIN" },
+        {label: 'Intercambio', value: "SWAP"},
+        {label: 'Cancelacion', value: "CANCELLATION"},
+        {label: 'Inscripcion', value: "JOIN"},
     ];
 
-    const courseOptions = useFacultyByNameAndPlan(faculty,plan).faculty?.groups.map((group) => ({
+    const courseOptions = useFacultyByNameAndPlan(faculty, plan).faculty?.courses.map((course) => ({
+        label: course.groupCode,
+        value: course.id,
+    })) || [];
+
+    const groupOptions = useGroupByCourseId().faculty?.groups.map((group) => ({
         label: group.groupCode,
         value: group.id,
     })) || [];
 
     return (
         <div className="flex flex-col">
-            <div className={`flex flex-row pl-4 pr-8 py-2 border border-gray-100 bg-white shadow-sm items-center duration-500 ${isActive ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+            <div
+                className={`flex flex-row pl-4 pr-8 py-2 border border-gray-100 bg-white shadow-sm items-center duration-500 ${isActive ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
                 <button
                     onClick={onToggle}
                     className={`rounded-full text-primary-mid p-2 transform transition-transform ${isActive ? 'rotate-180' : ''}`}>
@@ -94,10 +101,14 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                     </div>
                 </div>
             </div>
+
+            {/* Body */}
             <div className={`overflow-hidden transform transition-all duration-500 ${isActive ? '' : 'max-h-0'}`}>
                 <div className="border border-gray-100 rounded-b-2xl rounded-t-0 bg-white shadow-sm">
                     <main className="flex flex-row gap-12 py-6 px-18">
                         <div className="flex flex-col w-1/2">
+
+                            {/* Student info */}
                             <header className="flex flex-col gap-1 py-8">
                                 <p className="text-primary-mate text-3xl font-bold">{student.student?.fullName}</p>
                                 <div className="flex flex-row gap-32">
@@ -106,6 +117,7 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                                 </div>
                             </header>
 
+                            {/* Request info */}
                             <form className="flex flex-col gap-5 text-sm">
                                 <div className="flex flex-col gap-1 w-full">
                                     <p className="font-bold">Tipo de solicitud:</p>
@@ -121,11 +133,11 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                                         <p className="font-bold">Clase en Catalogo:</p>
                                         <DropdownMenu
                                             options={courseOptions}
-                                            selected={request.type}
+                                selected={request.type}
                                             onSelect={(value) => {
-                                                if (request.originGroupId !== undefined) {
+                                                if (request.originGroupId !== null) {
                                                     request.originGroupId = value;
-                                                } else if (request.destinationGroupId !== undefined) {
+                                                } else if (request.destinationGroupId !== null) {
                                                     request.destinationGroupId = value;
                                                 }
                                             }}
@@ -162,10 +174,12 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
                                 </div>
                             </button>
                             <div className="flex flex-row w-full items-center justify-center gap-1">
-                                <div className={`overflow-hidden transform duration-500 ${viewSchedule ? 'w-150 opacity-100' : 'w-0 opacity-0'}`}>
+                                <div
+                                    className={`overflow-hidden transform duration-500 ${viewSchedule ? 'w-150 opacity-100' : 'w-0 opacity-0'}`}>
                                     <ScheduleView data={datosHorario}/>
                                 </div>
-                                <div className={`overflow-hidden transform duration-500 ${viewSchedule ? 'w-0 opacity-0' : 'w-150 opacity-100}'}`}>
+                                <div
+                                    className={`overflow-hidden transform duration-500 ${viewSchedule ? 'w-0 opacity-0' : 'w-150 opacity-100}'}`}>
                                     <PemsumView data={datosHorario}/>
                                 </div>
                             </div>
@@ -173,7 +187,8 @@ const RequestCard =({ request, isActive, onToggle, editable}: RequestCardProps) 
 
 
                     </main>
-                    <footer className="flex flex-row justify-end bg-white border-t rounded-b-2xl border-gray-200 py-3 px-8">
+                    <footer
+                        className="flex flex-row justify-end bg-white border-t rounded-b-2xl border-gray-200 py-3 px-8">
                         <button
                             disabled={!editable}
                             className={`flex flex-row rounded-xl p-2 gap-2 transform transition-transform ${

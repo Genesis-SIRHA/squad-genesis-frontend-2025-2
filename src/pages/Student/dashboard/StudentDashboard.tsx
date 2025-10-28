@@ -1,15 +1,19 @@
 import useRequestByUserId from "../../../hooks/useRequestByUserId.ts";
 import RequestCard from "./components/RequestCard.tsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import loadingAnimation from "@/assets/animations/Loading.json";
 import Lottie from "lottie-react";
+import {AuthContext} from "@/context/AuthContext.tsx";
 
 const DashBoard = () => {
     const [activeRequestId, setActiveRequestId] = useState<string | null>(null);
-    const userId = "A123456789";
-    const {requests, loading} = useRequestByUserId(userId, "STUDENT");
-
-
+    const authContext = useContext(AuthContext);
+    if (!authContext) {
+        throw new Error("Header must be used within an AuthProvider");
+    }
+    const { user } = authContext;
+    const userId = user?.userId;
+    const {requests, loading} = useRequestByUserId(userId as string, "STUDENT");
 
     const toggleRequest = (requestId: string) => {
         setActiveRequestId(prevId => prevId === requestId ? null : requestId);
@@ -32,9 +36,6 @@ const DashBoard = () => {
             <div className="flex flex-col px-8 pt-8 h-full w-full gap-8">
                 <div className="flex flex-row h-1/3 gap-8">
                     <div className="flex flex-row items-center justify-center w-2/3 h-full rounded-xl bg-white shadow-sm">
-                        <div>
-
-                        </div>
 
                         <div className="flex-1 flex flex-col px-8 py-4 gap-4">
                             <div className="text-primary-mate font-bold"> Progreso academico </div>

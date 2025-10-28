@@ -7,13 +7,14 @@ import {AuthProvider} from './context/AuthProvider';
 import {ToastContainer} from "react-toastify";
 
 function App() {
+
     return (
         <AuthProvider>
             <Router>
                 <Routes>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<ProtectedRoute/>}>
-                        <Route path="/" element={
+                        <Route path="*" element={
                             <div className="flex h-screen bg-pattern-foreground overflow-hidden">
                                 <Navbar/>
                                 <div className="flex-1 flex flex-col min-w-0">

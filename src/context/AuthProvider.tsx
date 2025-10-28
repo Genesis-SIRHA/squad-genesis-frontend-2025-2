@@ -1,12 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
-
-interface User {
-    id: string;
-    userId: string;
-    email: string;
-    role: string | null;
-}
+import type {User} from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);

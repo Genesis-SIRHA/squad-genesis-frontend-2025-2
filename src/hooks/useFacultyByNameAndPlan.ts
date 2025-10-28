@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {type Faculty, FacultySchema} from "@/pages/Student/dashboard/schemas/FacultySchema.ts";
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 const useFacultyByNameAndPlan = (facultyName: string, plan: string) => {
     const [faculty, setFaculty] = useState<Faculty | null>(null);
@@ -9,7 +10,7 @@ const useFacultyByNameAndPlan = (facultyName: string, plan: string) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Faculty>(`/api/faculty/${facultyName}/${plan}`);
+            const response = await apiClient.get<Faculty>(`/faculty/${facultyName}/${plan}`);
             const validatedData = FacultySchema.parse(response.data);
             setFaculty(validatedData);
         } catch (error) {

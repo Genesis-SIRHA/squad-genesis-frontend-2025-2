@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {type Course, CourseSchema} from "../pages/Student/dashboard/schemas";
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 export const useGroupByGroupCode = (GroupCode: string ) => {
     const [Course, setCourse] = useState<Course|null>(null);
@@ -9,7 +10,7 @@ export const useGroupByGroupCode = (GroupCode: string ) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Course>(`/api/groups/${GroupCode}/course`);
+            const response = await apiClient.get<Course>(`/groups/${GroupCode}/course`);
             const validatedData = CourseSchema.parse(response.data);
             setCourse(validatedData);
         } catch (error) {

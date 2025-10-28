@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {type Request, RequestSchema} from '../pages/Student/dashboard/schemas';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 export const useRequestByUserId = (userId: string, role: string) => {
     const [requests, setRequest] = useState<Request[]>([]);
@@ -9,7 +10,7 @@ export const useRequestByUserId = (userId: string, role: string) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Request[]>(`/api/requests/${role}/${userId}`);
+            const response = await apiClient.get<Request[]>(`/requests/${role}/${userId}`);
 
             if (response.data instanceof Array){
                 const validatedData = response.data.map((request) => RequestSchema.parse(request));

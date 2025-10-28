@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import {User, Lock} from "lucide-react";
 import {useAuth} from "@/hooks/useAuth";
 import {useNavigate} from 'react-router-dom';
-import axios from "axios";
 import Lottie from "lottie-react";
 import LoginAnimation from "@/assets/animations/LoginAnimation.json";
 import {ToastContainer, toast} from 'react-toastify';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 const LoginPage: React.FC = () => {
     const {login} = useAuth();
@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/login", {
+            const response = await apiClient.post("/auth/login", {
                 email,
                 password
             }, {

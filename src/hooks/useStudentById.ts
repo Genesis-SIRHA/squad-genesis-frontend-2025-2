@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {type Student, StudentSchema} from '../pages/Student/dashboard/schemas';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 export const useStudentByUserId = (studentId: string) => {
     const [student, setStudent] = useState<Student | null>(null);
@@ -10,7 +11,7 @@ export const useStudentByUserId = (studentId: string) => {
         const fetchRequest = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get<Student>(`/api/student/${studentId}`);
+                const response = await apiClient.get<Student>(`/student/${studentId}`);
                 const validatedData = StudentSchema.parse(response.data);
                 setStudent(validatedData);
             } catch (error) {
@@ -31,7 +32,7 @@ export const useStudentByUserId = (studentId: string) => {
     const refetch = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Student>(`http://localhost:8080/api/student/${studentId}`);
+            const response = await apiClient.get<Student>(`student/${studentId}`);
             const validatedData = StudentSchema.parse(response.data);
             setStudent(validatedData);
         } catch {

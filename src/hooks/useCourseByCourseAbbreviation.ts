@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {type Course, CourseSchema} from '../pages/Student/dashboard/schemas';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 
 export const useCourseByCourseAbbreviation = (CourseAbbreviation: string) => {
@@ -10,7 +11,7 @@ export const useCourseByCourseAbbreviation = (CourseAbbreviation: string) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Course>(`/api/courses/${CourseAbbreviation}`);
+            const response = await apiClient.get<Course>(`/courses/${CourseAbbreviation}`);
             const validatedData = CourseSchema.parse(response.data);
             setCourse(validatedData);
         } catch (error) {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {type Group, GroupSchema} from '../pages/Student/dashboard/schemas';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 
 export const useGroupByGroupCode = (GroupCode: string) => {
@@ -10,7 +11,7 @@ export const useGroupByGroupCode = (GroupCode: string) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get<Group>(`/api/group/${GroupCode}`);
+            const response = await apiClient.get<Group>(`/group/${GroupCode}`);
             const validatedData = GroupSchema.parse(response.data);
             setGroup(validatedData);
         } catch (error) {
