@@ -3,8 +3,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import Login from "./pages/login/Login";
 import DashBoard from "@/pages/dashboard/Dashboard.tsx";
-import Pensum from "@/pages/Student/Pensum/Pensum";
 import Layout from "./components/Layout";
+import Pensum from "@/pages/Pensum/Pensum.tsx";
 
 function App() {
     return (

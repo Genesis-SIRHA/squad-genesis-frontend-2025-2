@@ -14,17 +14,17 @@ import PeriodPanel from "@/pages/dashboard/components/PeriodPanel.tsx";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatsPanel = ({role, userId}: { role: string; userId: string }) => {
-    const {percentage: completedPercentage} = useProgressPercentage(userId);
+    const {percentage: progressPercentage} = useProgressPercentage(userId);
     const {requestsComplete, requestsPending, requestsRevision, requestsRejected} = useRequestPercentages(userId);
 
-    const remaining = 100 - (completedPercentage || 0);
+    const remaining = 100 - (progressPercentage || 0);
     const fill = requestsComplete + requestsRejected + requestsPending ? 0 : 100;
 
     const progressData = {
         labels: ["Completado", "Incompleto"],
         datasets: [
             {
-                data: [completedPercentage, remaining],
+                data: [progressPercentage, remaining],
                 backgroundColor: ["#59F4BE", "#d1d1d1"],
                 borderWidth: 0,
             },
@@ -67,13 +67,13 @@ const StatsPanel = ({role, userId}: { role: string; userId: string }) => {
                                     <div className="flex flex-col gap-2 mt-2">
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 bg-secondary-success text-white text-xs font-semibold flex items-center justify-center rounded-sm">
-                                                {completedPercentage}%
+                                                {progressPercentage}%
                                             </div>
                                             <span className="text-sm text-foreground">Completado</span>
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 bg-secondary-neutral text-white text-xs font-semibold flex items-center justify-center rounded-sm">
-                                                {100 - completedPercentage}%
+                                                {100 - progressPercentage}%
                                             </div>
                                             <span className="text-sm text-foreground">Incompleto</span>
                                         </div>

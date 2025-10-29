@@ -1,4 +1,4 @@
-import CourseModule from "@/pages/Student/Pensum/CourseModule.tsx";
+import CourseModule from "@/pages/Pensum/CourseModule.tsx";
 import {useContext} from "react";
 import {AuthContext} from "@/context/AuthContext.tsx";
 import {usePensumByUserId} from "@/hooks/usePensumByUserId.ts";
