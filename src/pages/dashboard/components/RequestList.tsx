@@ -1,4 +1,4 @@
-import RequestCard from "./RequestCard.tsx";
+import RequestCard from "./requestCard/RequestCard.tsx";
 
 const RequestList = ({requests, activeRequestId, toggleRequest}: any) => (
     <div className="rounded-t-3xl bg-primary-smoke shadow-sm min-h-full h-auto">
