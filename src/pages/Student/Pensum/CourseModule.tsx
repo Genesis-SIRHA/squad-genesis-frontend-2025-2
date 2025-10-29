@@ -42,7 +42,7 @@ const CourseModule: React.FC<{ course: Course, state: string }> = ({ course, sta
             </div>
 
             {/* Tooltip */}
-            <div className="absolute z-10 hidden group-hover:block bg-primary-dark text-white text-xs p-3 rounded-2xl top-full mt-1 left-1/2 -translate-x-1/2 whitespace-nowrap shadow-lg">
+            <div className="absolute z-10 hidden group-hover:block bg-primary-smoke text-xs p-3 rounded-2xl top-full mt-1 left-1/2 -translate-x-1/2 w-48 break-words whitespace-normal shadow-lg">
                 <div className="font-medium mb-1">{course.courseName}</div>
                 <div>Créditos: {course.credits}</div>
                 {Array.isArray(course.requisites) && course.requisites.length > 0 && (
