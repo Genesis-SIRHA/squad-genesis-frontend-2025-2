@@ -4,10 +4,10 @@ import {type Course} from '@/schemas/CourseSchema';
 const CourseModule: React.FC<{ course: Course, state: string }> = ({ course, state }) => {
 
     const stateColor: Record<string, string> = {
-        "FAILED": '#212121',
-        "CANCELLED": 'bg-secondary-failed',
+        "failed": '#212121',
+        "cancelled": 'bg-secondary-failed',
         "pending": '#ffffff',
-        "SUCESS" : 'bg-secondary-success',
+        "success" : 'bg-secondary-success',
     };
     console.log(state);
     return (
