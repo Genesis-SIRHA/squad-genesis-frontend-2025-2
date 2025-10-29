@@ -1,45 +1,40 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState, useCallback } from "react";
 import apiClient from "@/lib/interceptors/apiClient.ts";
 import axios from "axios";
-import {type Pensum,PensumSchema} from "@/schemas";
+import { type Pensum, PensumSchema } from "@/schemas";
 
 export const usePensumByUserId = (studentId: string) => {
-    const [Pensum, setPensum] = useState<Pensum|null>(null);
+    const [Pensum, setPensum] = useState<Pensum | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             setLoading(true);
             const response = await apiClient.get<Pensum>(`/pemsum/${studentId}/respond`);
-
-            if (response.data instanceof Array){
-                const validatedData = PensumSchema.parse(response);
-                setPensum(validatedData);
-            }else{
-                console.log(response.data);
-                console.error('response is not a array');
-                setPensum(null);
-            }
-
-
+            const validatedData = PensumSchema.parse(response.data);
+            setPensum(validatedData);
+            console.log("Pensum que ha llegado a front", validatedData);
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                console.error("Axios error:", error.response?.data || error.message);
-            } else {
-                console.error("Unexpected error:", error);
+                if (error.response) {
+                    console.error("API Error Response:", {
+                        status: error.response.status,
+                        statusText: error.response.statusText,
+                        data: error.response.data,
+                        headers: error.response.headers,
+                    });
+                }
             }
-            setPensum(null);
-
         } finally {
             setLoading(false);
         }
-    };
+    }, [studentId]);
 
     useEffect(() => {
-        fetchData().then(r => console.log(r));
-    }, [fetchData, studentId]);
+        fetchData();
+    }, [fetchData]);
 
     const refetch = fetchData;
 
-    return {Pensum, loading, refetch};
+    return { Pensum, loading, refetch };
 };

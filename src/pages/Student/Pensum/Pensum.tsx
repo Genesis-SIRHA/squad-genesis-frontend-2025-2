@@ -32,9 +32,12 @@ const Pensum = () => {
         <div className="w-full h-full overflow-x bg-primary-smoke">
             <div className="grid grid-rows-8 gap-4">
                 {semesters.map((sem) => {
-                    const semesterCourses = Array.from(Pensum.courses.entries())
-                        .map(([course, status]) => ({ ...course, status }))
-                        .filter(course => course.semester === sem);
+                    const semesterCourses = Pensum.courses
+                        .filter(({ course }) => course.semester === sem)
+                        .map(({ course, status }) => ({
+                            ...course,
+                            status
+                        }));
 
                     return (
                         <div key={sem} className="grid grid-cols-8 gap-2">
