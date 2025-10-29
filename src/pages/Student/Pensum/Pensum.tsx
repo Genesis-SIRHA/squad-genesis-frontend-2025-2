@@ -29,8 +29,8 @@ const Pensum = () => {
 
 
     return (
-        <div className="w-full h-full overflow-x bg-primary-smoke">
-            <div className="grid grid-rows-8 gap-4">
+        <div className="w-full h-full overflow-x-auto bg-primary-smoke p-4">
+            <div className="grid grid-rows-8 gap-6 min-w-max">
                 {semesters.map((sem) => {
                     const semesterCourses = Pensum.courses
                         .filter(({ course }) => course.semester === sem)
@@ -40,7 +40,7 @@ const Pensum = () => {
                         }));
 
                     return (
-                        <div key={sem} className="grid grid-cols-8 gap-2">
+                        <div key={sem} className="grid grid-cols-8 gap-4 min-w-max">
                             {semesterCourses.map((course) => (
                                 <div
                                     key={`${course.abbreviation}-${sem}`}
