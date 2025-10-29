@@ -106,12 +106,6 @@ const LoginPage: React.FC = () => {
                             </form>
 
                             <p className="text-primary-mate text-sm">
-                                Don't have an account?{" "}
-                                <a href="#" className="text-primary-mid">
-                                    Sign Up
-                                </a>
-                            </p>
-                            <p className="text-primary-mate text-sm">
                                 Forgot Password?{" "}
                                 <a href="#" className="text-primary-mid">
                                     Reset Password
