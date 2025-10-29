@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { User, Lock } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
+import React, {useState} from "react";
+import {User, Lock} from "lucide-react";
+import {useAuth} from "@/hooks/useAuth";
+import {useNavigate} from 'react-router-dom';
+import Lottie from "lottie-react";
+import LoginAnimation from "@/assets/animations/LoginAnimation.json";
+import {ToastContainer, toast} from 'react-toastify';
+import apiClient from "@/lib/interceptors/apiClient.ts";
 
 const LoginPage: React.FC = () => {
-    const { login } = useAuth();
+    const {login} = useAuth();
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -14,43 +20,60 @@ const LoginPage: React.FC = () => {
         setLoading(true);
         setError(null);
 
+        if (!email || !password) {
+            setError("Please fill in all fields");
+            toast.error("Please fill in all fields");
+            setLoading(false);
+            return;
+        }
+
         try {
-            const response = await fetch("http://localhost:8080/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
+            const response = await apiClient.post("/auth/login", {
+                email,
+                password
+            }, {
+                headers: {"Content-Type": "application/json"}
             });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText || "Login failed");
-            }
-
-            const result = await response.json();
-            console.log("✅ Login success:", result);
-            login(result.token, result.user);
-            alert("Login success!");
+            console.log("Login response:", response.data);
+            login(response.data.token, response.data.user);
+            navigate('/dashboard');
         } catch (err: any) {
-            console.error("❌ Login error:", err);
-            setError("Invalid email or password");
+            console.error("Login error:", err);
+            setError(err.response?.data?.message || "Error al iniciar sesión");
+            toast.error(error);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen w-full bg-pattern flex items-center justify-center">
-            <div className="w-full h-full flex items-center justify-center">
-                <div className="bg-primary-mate flex flex-row rounded-4xl shadow-lg bg-primary-smoke">
-                    <div className="w-2/5 p-6 pt-24 my-6 mx-10 login-container flex flex-col items-center bg-primary-smoke gap-4">
-                        <p className="text-primary-mate text-2xl font-title text-gradient">Sirha</p>
-                        <p className="text-primary-mate text-2xl font-bold">Login</p>
+        <div className="h-screen w-full bg-pattern-big flex items-center justify-center p-4">
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                toastClassName="rounded-lg shadow-md"
+            />
+            <div className="flex w-full max-w-6xl h-[80vh] glass rounded-4xl shadow-lg overflow-hidden">
+                {/* Sección del formulario */}
+                <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center bg-primary-smoke">
+                    <div className="w-full text-center">
+                        <p className="text-primary-mate text-8xl font-title text-gradient">Sirha</p>
+                        <p className="text-primary-mate text-xl font-bold">Login</p>
 
-                        <div className="w-full flex flex-col items-center space-y-4 form-container">
-                            <form onSubmit={handleSubmit} className="flex flex-col items-center width-field">
+                        <div className="flex flex-col w-full h-full items-center space-y-4">
+                            <form onSubmit={handleSubmit} className="flex flex-col w-3/5 items-center">
                                 {/* Email */}
                                 <div className="w-full flex flex-row gap-2 w-input-field my-4 items-center">
-                                    <User strokeWidth={3} className="w-8 h-8 text-primary-mid" />
+                                    <User strokeWidth={3} className="w-8 h-8 text-primary-mid"/>
                                     <input
                                         type="text"
                                         placeholder="Email"
@@ -62,7 +85,7 @@ const LoginPage: React.FC = () => {
 
                                 {/* Password */}
                                 <div className="w-full flex flex-row gap-2 w-input-field my-4 items-center">
-                                    <Lock strokeWidth={3} className="w-8 h-8 text-primary-mid" />
+                                    <Lock strokeWidth={3} className="w-8 h-8 text-primary-mid"/>
                                     <input
                                         type="password"
                                         placeholder="Password"
@@ -71,9 +94,6 @@ const LoginPage: React.FC = () => {
                                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-mid"
                                     />
                                 </div>
-
-                                {/* Error */}
-                                {error && <p className="text-red-600 text-sm">{error}</p>}
 
                                 {/* Botón */}
                                 <button
@@ -99,11 +119,19 @@ const LoginPage: React.FC = () => {
                             </p>
                         </div>
                     </div>
-
-                    <div className="w-3/5 bg-pattern bg-cover bg-center rounded-4xl flex items-center justify-center">
-                        <div className="bg-customGradient bg-opacity-40 w-full h-full py-24 rounded-4xl flex items-center justify-center">
-                            <img src="/public/images/login-decorator.svg" alt="Login Decorator" />
+                </div>
+                <div className="w-1/2 h-full rounded-4xl flex items-center justify-center">
+                    <div className="w-full h-full rounded-4xl flex items-center justify-center">
+                        <div className="w-full h-full flex items-center justify-center">
+                            <div className="w-full">
+                                <Lottie
+                                    animationData={LoginAnimation}
+                                    loop
+                                    autoplay
+                                />
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -112,3 +140,4 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+
