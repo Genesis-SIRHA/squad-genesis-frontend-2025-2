@@ -2,12 +2,12 @@ import {useEffect, useState} from "react";
 import apiClient from "@/lib/interceptors/apiClient.ts";
 import axios from "axios";
 
-const useCompletedPercentage = (userId: string) => {
+const useProgressPercentage = (userId: string) => {
     const [percentage, setPercentage] = useState<number>(0);
 
     const fetchData = async () => {
         try {
-            const response = await apiClient.get<number>(`/pemsum/${userId}/completed-percentages`);
+            const response = await apiClient.get<number>(`/pemsum/${userId}/completed-courses`);
             setPercentage(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -27,4 +27,4 @@ const useCompletedPercentage = (userId: string) => {
     return {percentage};
 }
 
-export default useCompletedPercentage;
+export default useProgressPercentage;
