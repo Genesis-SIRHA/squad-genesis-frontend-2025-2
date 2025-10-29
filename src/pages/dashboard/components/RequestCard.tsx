@@ -1,11 +1,11 @@
-import {type Request, RequestStatus} from '../../../../schemas';
+import {type Request, RequestStatus} from '../../../schemas';
 import {ChevronDown, SendHorizonal} from "lucide-react";
-import useCourseByGroupCode from "../../../../hooks/useCourseByGroupCode.ts";
-import useStudentById from "../../../../hooks/useStudentById.ts";
+import useCourseByGroupCode from "../../../hooks/useCourseByGroupCode.ts";
+import useStudentById from "../../../hooks/useStudentById.ts";
 import {DropdownMenu} from "@/lib";
 import useFacultyByNameAndPlan from "@/hooks/useFacultyByNameAndPlan.ts";
-import ScheduleView from "@/pages/Student/dashboard/components/ScheduleView.tsx";
-import PemsumView from "@/pages/Student/dashboard/components/PemsumView.tsx";
+import ScheduleView from "@/pages/dashboard/components/ScheduleView.tsx";
+import PemsumView from "@/pages/dashboard/components/PemsumView.tsx";
 import {useState} from "react";
 
 interface RequestCardProps {
