@@ -1,0 +1,5 @@
+export * from "./RequestSchema.ts"
+export * from "./StudentSchema.ts"
+export * from "./CourseSchema.ts"
+export * from "./GroupSchema.ts"
+export * from "./PensumSchema.ts"

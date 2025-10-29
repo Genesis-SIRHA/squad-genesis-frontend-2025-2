@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {type Group, GroupSchema} from '../pages/Student/dashboard/schemas';
+import {type Group, GroupSchema} from '../schemas';
 import apiClient from "@/lib/interceptors/apiClient.ts";
 
 

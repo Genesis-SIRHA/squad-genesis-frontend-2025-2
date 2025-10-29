@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {type Student, StudentSchema} from '../pages/Student/dashboard/schemas';
+import {type Student, StudentSchema} from '../schemas';
 import apiClient from "@/lib/interceptors/apiClient.ts";
 
 export const useStudentByUserId = (studentId: string) => {

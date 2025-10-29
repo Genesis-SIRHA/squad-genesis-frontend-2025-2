@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CourseSchema } from "./CourseSchema";
 
 export const FacultySchema = z.object({
     id: z.string(),

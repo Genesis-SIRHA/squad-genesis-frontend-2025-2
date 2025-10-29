@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import {type Request, RequestSchema} from '../schemas';
+import {useEffect, useState} from "react";
 import apiClient from "@/lib/interceptors/apiClient.ts";
+import axios from "axios";
+import {type Pensum,PensumSchema} from "@/schemas";
 
-export const useRequestByUserId = (userId: string, role: string) => {
-    const [requests, setRequest] = useState<Request[]>([]);
+export const usePensumByUserId = (studentId: string) => {
+    const [Pensum, setPensum] = useState<Pensum|null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await apiClient.get<Request[]>(`/requests/${role}/${userId}`);
+            const response = await apiClient.get<Pensum>(`/pemsum/${studentId}/respond`);
 
             if (response.data instanceof Array){
-                const validatedData = response.data.map((request) => RequestSchema.parse(request));
-                setRequest(validatedData);
+                const validatedData = PensumSchema.parse(response);
+                setPensum(validatedData);
             }else{
                 console.log(response.data);
                 console.error('response is not a array');
-                setRequest([]);
+                setPensum(null);
             }
 
 
@@ -28,7 +28,7 @@ export const useRequestByUserId = (userId: string, role: string) => {
             } else {
                 console.error("Unexpected error:", error);
             }
-            setRequest([]);
+            setPensum(null);
 
         } finally {
             setLoading(false);
@@ -36,13 +36,10 @@ export const useRequestByUserId = (userId: string, role: string) => {
     };
 
     useEffect(() => {
-        fetchData();
-    }, [userId, role]);
+        fetchData().then(r => console.log(r));
+    }, [fetchData, studentId]);
 
     const refetch = fetchData;
 
-    return {requests, loading, refetch};
+    return {Pensum, loading, refetch};
 };
-
-
-export default useRequestByUserId;

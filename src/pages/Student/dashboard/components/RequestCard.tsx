@@ -1,4 +1,4 @@
-import {type Request, RequestStatus} from '../schemas';
+import {type Request, RequestStatus} from '../../../../schemas';
 import {ChevronDown, SendHorizonal} from "lucide-react";
 import useCourseByGroupCode from "../../../../hooks/useCourseByGroupCode.ts";
 import useStudentById from "../../../../hooks/useStudentById.ts";
@@ -21,8 +21,8 @@ const RequestCard = ({request, isActive, onToggle, editable}: RequestCardProps) 
     const course = useCourseByGroupCode(groupCode);
     const student = useStudentById(request.studentId);
 
-    const faculty = student.student?.facultyName;
-    const plan = student.student?.plan;
+    const faculty = student.student?.facultyName || "";
+    const plan = student.student?.plan || "";
 
     console.log(request)
 
@@ -67,13 +67,8 @@ const RequestCard = ({request, isActive, onToggle, editable}: RequestCardProps) 
     ];
 
     const courseOptions = useFacultyByNameAndPlan(faculty, plan).faculty?.courses.map((course) => ({
-        label: course.groupCode,
-        value: course.id,
-    })) || [];
-
-    const groupOptions = useGroupByCourseId().faculty?.groups.map((group) => ({
-        label: group.groupCode,
-        value: group.id,
+        label: course.courseName,
+        value: course.abbreviation,
     })) || [];
 
     return (
