@@ -9,11 +9,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
         const storedUser = localStorage.getItem("user");
+
         if (storedToken && storedUser) {
-            setToken(storedToken);
-            setUser(JSON.parse(storedUser));
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                setToken(storedToken);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error("Error al parsear el usuario:", error);
+                localStorage.removeItem("user");
+            }
         }
     }, []);
+
 
     const login = (token: string, user: User) => {
         setToken(token);
