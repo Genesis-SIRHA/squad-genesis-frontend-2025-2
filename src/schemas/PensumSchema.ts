@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {CourseSchema} from "@/schemas/CourseSchema.ts";
+import {CourseWithStatusSchema} from "@/schemas/CourseWithStatusSchema.ts";
 
 export const PensumSchema = z.object({
     studentId: z.string(),
@@ -8,7 +8,7 @@ export const PensumSchema = z.object({
     facultyPlan: z.string(),
     approvedCredits: z.number(),
     totalCredits: z.number(),
-    courses: z.map(CourseSchema,z.string())
+    courses: z.array(CourseWithStatusSchema)
 });
 
 export type Pensum = z.infer<typeof PensumSchema>;
