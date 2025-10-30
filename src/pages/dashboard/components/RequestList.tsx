@@ -17,8 +17,7 @@ const RequestList = ({requests, activeRequestId, toggleRequest}: any) => (
                         request={request}
                         isActive={activeRequestId === request.requestId}
                         onToggle={() => toggleRequest(request.requestId)}
-                        editable={false}
-                    />
+                        editable={false} mode={"create"}                    />
                 ))
             ) : (
                 <p className="text-center py-4">No hay solicitudes disponibles</p>

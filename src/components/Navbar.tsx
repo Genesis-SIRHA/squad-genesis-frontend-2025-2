@@ -11,8 +11,15 @@ import {AuthContext} from "@/context/AuthContext.tsx";
 
 export const Navbar = () => {
     const location = useLocation();
-    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const authContext = useContext(AuthContext);
+
+    if (!authContext) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+
+    const { logout } = authContext;
 
     const handleLogout = () => {
         logout();

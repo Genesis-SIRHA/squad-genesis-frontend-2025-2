@@ -12,6 +12,7 @@ interface RequestCardProps {
     isActive: boolean;
     onToggle: () => void;
     mode: 'create' | 'view' | 'respond';
+    editable?: boolean;
 }
 
 const RequestCard = ({ request, isActive, onToggle, mode }: RequestCardProps) => {
@@ -27,7 +28,6 @@ const RequestCard = ({ request, isActive, onToggle, mode }: RequestCardProps) =>
     })) || [];
 
     const editable = mode === 'create';
-    const showActions = mode === 'create' || mode === 'respond';
 
     return (
         <div className="flex flex-col">
@@ -43,6 +43,7 @@ const RequestCard = ({ request, isActive, onToggle, mode }: RequestCardProps) =>
             <RequestBody
                 isActive={isActive}
                 student={student.student}
+                studentId={request.studentId}
                 request={request}
                 editable={editable}
                 courseOptions={courseOptions}

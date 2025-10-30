@@ -1,21 +1,22 @@
 import RequestForm from "@/pages/dashboard/components/requestCard/components/RequestForm.tsx";
 import StudentInfo from "@/pages/dashboard/components/requestCard/components/StudentInfo.tsx";
 import ScheduleToggle from "@/pages/dashboard/components/requestCard/components/ScheduleToggle.tsx";
-import type {Course, Student} from "@/schemas";
+import type {Student} from "@/schemas";
 import type {Request} from "@/schemas/RequestSchema";
 
 interface RequestBodyProps {
     isActive: boolean;
     student: Student | null;
+    studentId: string;
     request: Request;
     editable: boolean;
-    courseOptions: Course[];
+    courseOptions: Array<{ label: string; value: string }>;
     viewSchedule: boolean;
     setViewSchedule: (value: boolean) => void;
-    mode: string;
+    mode: 'create' | 'view' | 'respond';
 }
 
-const RequestBody = ({isActive, student, request, editable, courseOptions, viewSchedule, setViewSchedule, mode}: RequestBodyProps) => {
+const RequestBody = ({isActive, student, studentId, request, editable, courseOptions, viewSchedule, setViewSchedule, mode}: RequestBodyProps) => {
     return (
         <div className={`overflow-hidden transform transition-all duration-500 ${isActive ? '' : 'max-h-0'}`}>
             <div className="border border-gray-100 rounded-b-2xl rounded-t-0 bg-white shadow-sm">
@@ -32,6 +33,7 @@ const RequestBody = ({isActive, student, request, editable, courseOptions, viewS
                     <ScheduleToggle
                         viewSchedule={viewSchedule}
                         setViewSchedule={setViewSchedule}
+                        studentId={studentId}
                     />
                 </main>
             </div>
