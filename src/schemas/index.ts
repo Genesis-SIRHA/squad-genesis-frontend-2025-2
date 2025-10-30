@@ -3,3 +3,8 @@ export * from "./StudentSchema.ts"
 export * from "./CourseSchema.ts"
 export * from "./GroupSchema.ts"
 export * from "./PensumSchema.ts"
+export * from "./ProfessorSchema.ts"
+export * from "./FacultySchema.ts"
+export * from "./DeanSchema.ts"
+export * from "./AdministratorSchema.ts"
+
