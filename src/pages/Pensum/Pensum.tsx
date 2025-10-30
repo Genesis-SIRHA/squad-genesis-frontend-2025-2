@@ -4,6 +4,7 @@ import {AuthContext} from "@/context/AuthContext.tsx";
 import {usePensumByUserId} from "@/hooks/usePensumByUserId.ts";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/assets/animations/Loading.json";
+import ProgressBar from "@/lib/components/ProgressBar.tsx";
 
 const Pensum = () => {
     const authContext = useContext(AuthContext);
@@ -40,20 +41,28 @@ const Pensum = () => {
     return (
         <div className="w-full h-full bg-primary-smoke p-8  overflow-hidden">
             {/* Sección de créditos */}
-            <div className="flex flex-col h-1/5 bg-customGradient overflow-hidden rounded-lg shadow-sm p-4 mb-4">
-                <div className="flex flex-row justify-around text-lg items-center mb-2">
-                    <div className="flex flex-col justify-center">
-                        <div className="text-white"><span>Id Estudiante:</span> {Pensum.studentId}</div>
-                        <div className="text-white"><span>Estudiante:</span> {Pensum.studentName}</div>
+            <div className="flex flex-col h-1/5 bg-primary-smoke overflow-hidden p-4 mb-4">
+                <div className="flex flex-row gap-4">
+                    <div className="flex flex-col w-2/3 h-full bg-white p-4 shadow-sm rounded-2xl justify-around text-lg items-center mb-2">
+                        <div className="flex flex-row w-full px-16 justify-between text-lg items-center mb-2">
+                            <div className="flex flex-col justify-center">
+                                <div className="text-foreground"><span>Id Estudiante:</span> {Pensum.studentId}</div>
+                                <div className="text-foreground"><span>Estudiante:</span> {Pensum.studentName}</div>
+                            </div>
+                            <div className="flex flex-col justify-center">
+                                <div className="text-foreground"><span>Carrera:</span> {Pensum.facultyName}</div>
+                                <div className="text-foreground"><span>Plan:</span> {Pensum.facultyPlan}</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center justify-center w-2/3">
+                            <ProgressBar label="Progreso" value={progressPercentage} />
+                        </div>
                     </div>
-                    <div className="flex flex-col justify-center">
-                        <div className="text-white"><span>Carrera:</span> {Pensum.facultyName}</div>
-                        <div className="text-white"><span>Plan:</span> {Pensum.facultyPlan}</div>
-                    </div>
-                    <div className="flex flex-col justify-center">
+                    <div className="flex flex-col w-1/3 h-full bg-customGradient justify-center items-center p-4 shadow-sm rounded-2xl">
                         <div className="text-white"><span>Creditos aprobados:</span> {Pensum.approvedCredits}</div>
                         <div className="text-white"><span>Creditos pendientes:</span> {Pensum.totalCredits - Pensum.approvedCredits}</div>
-                        <div className="text-white"><span>Credutos totales:</span> {Pensum.totalCredits}</div>
+                        <div className="text-white"><span>Creditos totales:</span> {Pensum.totalCredits}</div>
+
                     </div>
                 </div>
             </div>
