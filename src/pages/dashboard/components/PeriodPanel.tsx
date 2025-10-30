@@ -12,13 +12,21 @@ const RequestPeriodPanel = ({ period }: Props) => {
         if (period && period.isActive) {
             const now = new Date();
             const end = new Date(period.finalDate);
-            const diff = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+            if (isNaN(end.getTime())) {
+                setDaysLeft(null);
+                return;
+            }
 
+            const diff = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
             setDaysLeft(diff >= 0 ? diff : null);
         } else {
             setDaysLeft(null);
         }
     }, [period]);
+    const formatDate = (dateString: string | Date): string => {
+        const date = new Date(dateString);
+        return isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleDateString();
+    };
 
     return (
         <div className="flex flex-col h-full w-1/3 bg-customGradient rounded-xl shadow-sm p-6 items-center justify-center">
@@ -34,8 +42,8 @@ const RequestPeriodPanel = ({ period }: Props) => {
 
             {period && (
                 <div className="mt-4 text-xs text-primary-smoke">
-                    Desde <strong>{period.initialDate.toLocaleDateString()}</strong> hasta{" "}
-                    <strong>{period.finalDate.toLocaleDateString()}</strong>
+                    Desde <strong>{formatDate(period.initialDate)}</strong> hasta{" "}
+                    <strong>{formatDate(period.finalDate)}</strong>
                 </div>
             )}
         </div>

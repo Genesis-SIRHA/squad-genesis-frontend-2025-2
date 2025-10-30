@@ -15,7 +15,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatsPanel = ({role, userId}: { role: string; userId: string }) => {
     const {percentage: progressPercentage} = useProgressPercentage(userId);
-    const {requestsComplete, requestsPending, requestsRevision, requestsRejected} = useRequestPercentages(userId);
+    const {requestsComplete, requestsPending, requestsRevision, requestsRejected} = useRequestPercentages(userId, role);
 
     const remaining = 100 - (progressPercentage || 0);
     const fill = requestsComplete + requestsRejected + requestsPending ? 0 : 100;

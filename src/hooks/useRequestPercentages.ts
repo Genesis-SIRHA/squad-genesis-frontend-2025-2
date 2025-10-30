@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import apiClient from "@/lib/interceptors/apiClient.ts";
 import axios from "axios";
 
-const useRequestPercentages = (userId: string) => {
+const useRequestPercentages = (userId: string, role: string) => {
     const [requestsComplete, setRequestsComplete] = useState<number>(0);
     const [requestsRejected, setRequestsRejected] = useState<number>(0);
     const [requestsPending, setRequestsPending ] = useState<number>(0);
@@ -10,7 +10,7 @@ const useRequestPercentages = (userId: string) => {
 
     const fetchData = async () => {
         try {
-            const response = await apiClient.get<Array<number>>(`/requests/${userId}/stats`);
+            const response = await apiClient.get<Array<number>>(`/requests/${role}/${userId}/stats`);
             setRequestsComplete(response.data[0]);
             setRequestsPending(response.data[1]);
             setRequestsRevision(response.data[2]);

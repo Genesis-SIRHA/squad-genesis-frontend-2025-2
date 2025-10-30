@@ -28,12 +28,6 @@ const Login: React.FC = () => {
 
                         <div className="flex flex-col w-full h-full items-center space-y-4">
                             <LoginForm/>
-                            <p className="text-primary-mate text-sm">
-                                Forgot Password?{" "}
-                                <a href="#" className="text-primary-mid">
-                                    Reset Password
-                                </a>
-                            </p>
                         </div>
                     </div>
                 </div>
