@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {
     ChartColumnBig,
     SquareCheck,
@@ -6,9 +6,25 @@ import {
     Settings,
     LogOut,
 } from 'lucide-react';
+import {useContext} from "react";
+import {AuthContext} from "@/context/AuthContext.tsx";
 
 export const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const authContext = useContext(AuthContext);
+
+    if (!authContext) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+
+    const { logout } = authContext;
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     const navItems = [
         { path: '/dashboard', label: 'Dashboard', icon: SquareCheck },
@@ -38,15 +54,15 @@ export const Navbar = () => {
                     </Link>
                 ))}
 
-                <Link
-                    to="/logout"
+                <button
+                    onClick={handleLogout}
                     className="fixed bottom-0 pb-6 flex items-center p-3 rounded-lg text-primary-mid hover:text-primary-smoke transition-colors"
                 >
                     <LogOut className="w-8 h-8 mr-3 flex-shrink-0" />
                     <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200">
                         Logout
                     </span>
-                </Link>
+                </button>
             </div>
         </nav>
     );

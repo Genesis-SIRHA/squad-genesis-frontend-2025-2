@@ -1,5 +1,5 @@
 import React from 'react';
-import {type Course} from '@/schemas/CourseSchema';
+import {type Course} from '@/schemas/CourseSchema.ts';
 
 type CourseState = 'failed' | 'cancelled' | 'pending' | 'success';
 

@@ -2,6 +2,9 @@ import React from 'react';
 import {useState} from 'react';
 type PemsumItem = {
     semester: string;
+    courseName: string;
+    courseAbbreviation: string;
+    state?: 'completed' | 'in-progress' | 'pending' | 'cancelled';
 };
 
 type Props = {
@@ -9,7 +12,7 @@ type Props = {
 };
 
 const semester = ['1', '2', '3', '4', '5', '6', '7', '8'];
-const slots = [1, 2, 3, 4, 5, 6];
+const slots = [1, 2, 3, 4, 5];
 
 const PemsumView: React.FC<Props> = ({data}) => {
     const [currentSlot, setCurrentSlot] = useState(0);
@@ -28,13 +31,19 @@ const PemsumView: React.FC<Props> = ({data}) => {
                 <tr key={slot} className="h-5">
                     <td className="px-2 py-1 font-semibold text-center">{slot}</td>
                     {semester.map(semester => {
-                        const item = data.find(entry => entry.semester === semester);
+                        const item = data.find(entry => entry.semester === semester
+                        && data.filter(i => i.semester === semester).indexOf(entry) === slot - 1);
                         setCurrentSlot(slot + 1);
                         return (
                             <td
-                                key={`${semester}-${currentSlot}`}
-                                className={`px-2 py-1 w-20 text-center rounded-full ${item ? 'bg-secondary-success' : 'bg-secondary-neutral'}`}
+                                key={`${semester}-${slot}`}
+                                className={`px-2 py-2 w-20 h-12 text-center rounded-3xl ${
+                                    item?.state === 'completed' ? 'bg-secondary-completed' :
+                                        item?.state === 'cancelled' ? 'bg-secondary-cancelled' :
+                                            'bg-secondary-neutral'
+                                }`}
                             >
+                                <span className="text-foreground">{item?.courseAbbreviation}</span>
                             </td>
                         );
                     })}
