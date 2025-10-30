@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: 'AlexanaNeue';
+    src: url('/public/fonts/AlexanaNeue.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #313131;
+    overflow: hidden;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+span{
+    font-weight: bold;
+}
+
+.scrollable-container{
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    scrollbar-color: #F45356 #f3f3f3;
+}
+
+.glass {
+    background: rgba(229, 106, 106, 0.24);
+    backdrop-filter: blur(2px);
+}
+
+.bg-pattern-big {
+    background: url('/public/images/pattern-bg-big.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-pattern-small {
+    background: url('/public/images/pattern-bg-small.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-pattern-foreground {
+    background: url('/public/images/pattern-bg-foreground.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.bg-customGradient {
+    background: linear-gradient(135deg, #F26E35 0%, #F45356 50%, #E73858 100%);
+}
+
+.bg-primary-smoke {
+    background-color: #f8f8f8;
+}
+
+.bg-foreground {
+    background: #f3f3f3;
+}
+
+.bg-primary-dark {
+    background-color: #E73858;
+}
+
+.bg-primary-mid {
+    background-color: #F45356;
+}
+
+.bg-primary-light {
+    background-color: #F26E35;
+}
+
+.bg-secondary-neutral {
+    background-color: #d1d1d1;
+}
+
+.bg-secondary-error {
+    background-color: #F45369;
+}
+
+.bg-secondary-success {
+    background-color: #59F4BE;
+}
+
+.text-primary-smoke {
+    color: #f8f8f8;
+}
+
+.text-primary-mate {
+    color: #313131;
+}
+
+.text-primary-mid {
+    color: #F45356;
+}
+.text-primary-dark {
+    color: #E73858;
+}
+
+.text-secondary-mid{
+    color: #f8777a;
+}
+
+.text-foreground{
+    color: #757575;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    margin: 5vw;
+}
+
+.font-title{
+    font-family: 'AlexanaNeue', sans-serif;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #F26E35 0%, #F45356 50%, #E73858 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.ring-primary-mid {
+    --tw-ring-color: #262626;
+}
+
