@@ -25,7 +25,7 @@ const stateColor: Record<CourseState, { bg: string; text: string }> = {
 const CourseModule: React.FC<{ course: Course, state: CourseState }> = ({ course, state }) => {
 
     return (
-        <div className="group relative flex flex-col h-full w-full p-1 rounded-lg cursor-pointer transition duration-200 border border-primary-smoke hover:shadow-md hover:border-primary-light">
+        <div className="group relative flex flex-col h-full w-full p-1 rounded-lg cursor-pointer transition duration-200 hover:shadow-md hover:border-primary-light">
             <div className={`h-1/2 w-full p-3 flex flex-row rounded-t ${stateColor[state]?.bg || 'bg-gray-400'}`}>
                 <div className="w-2/3 font-medium">{course.abbreviation}</div>
                 <div className="w-1/3 text-right">{course.credits} CR</div>
@@ -36,7 +36,7 @@ const CourseModule: React.FC<{ course: Course, state: CourseState }> = ({ course
             </div>
 
             {/* Tooltip */}
-            <div className="absolute z-10 hidden group-hover:block bg-primary-smoke text-xs p-3 rounded-2xl top-full mt-1 left-1/2 -translate-x-1/2 w-48 break-words whitespace-normal shadow-lg">
+            <div className="absolute z-10 hidden group-hover:block bg-primary-smoke text-xs p-3 rounded-2xl bottom-full mt-1 left-1/2 -translate-x-1/2 w-48 break-words whitespace-normal shadow-lg">
                 <div className="font-medium mb-1">{course.courseName}</div>
                 <div>Créditos: {course.credits}</div>
                 {Array.isArray(course.requisites) && course.requisites.length > 0 && (
