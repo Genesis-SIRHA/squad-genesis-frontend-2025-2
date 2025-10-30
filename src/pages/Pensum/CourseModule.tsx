@@ -1,7 +1,7 @@
 import React from 'react';
 import {type Course} from '@/schemas/CourseSchema.ts';
 
-type CourseState = 'failed' | 'cancelled' | 'pending' | 'success';
+export type CourseState = 'failed' | 'cancelled' | 'pending' | 'success';
 
 const stateColor: Record<CourseState, { bg: string; text: string }> = {
     "failed": {

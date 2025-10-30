@@ -1,4 +1,4 @@
-import CourseModule from "@/pages/Pensum/CourseModule.tsx";
+import CourseModule, {type CourseState} from "@/pages/Pensum/CourseModule.tsx";
 import {useContext} from "react";
 import {AuthContext} from "@/context/AuthContext.tsx";
 import {usePensumByUserId} from "@/hooks/usePensumByUserId.ts";
@@ -93,7 +93,7 @@ const Pensum = () => {
                                     <div key={course.abbreviation} className="group">
                                         <CourseModule
                                             course={course}
-                                            state={course.status.toLowerCase()}
+                                            state={course.status.toLowerCase() as CourseState}
                                         />
                                     </div>
                                 ))}

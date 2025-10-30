@@ -35,16 +35,6 @@ const Dashboard = () => {
     const handleSaveNewRequest = (newRequest: Request) => {
         console.log('Creando nueva solicitud:', newRequest);
 
-        const requestToSave = {
-            ...newRequest,
-            requestId: `temp-${Date.now()}`,
-            studentId: userId,
-            createdAt: new Date().toISOString(),
-            status: 'pending' as RequestStatus
-        };
-
-        // Aquí iría la llamada a tu API para guardar la solicitud
-        // await saveRequestToAPI(requestToSave);
 
         setIsCreating(false);
         toast.success("Solicitud creada exitosamente");

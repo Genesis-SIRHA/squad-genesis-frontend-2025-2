@@ -16,6 +16,7 @@ const slots = [1, 2, 3, 4, 5];
 
 const PemsumView: React.FC<Props> = ({data}) => {
     const [currentSlot, setCurrentSlot] = useState(0);
+    console.log(currentSlot)
     return (
         <table className="table-auto border-collapse w-full border-separate border-spacing-1">
             <thead>

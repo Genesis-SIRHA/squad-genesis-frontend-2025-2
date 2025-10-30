@@ -34,34 +34,6 @@ const RequestForm = ({request, editable, courseOptions, mode, onUpdate, onFieldC
     const showOriginGroup = request.type === 'SWAP' || request.type === 'CANCELLATION';
     const showDestinationGroup = request.type === 'SWAP' || request.type === 'JOIN';
 
-    const getSelectedGroup = () => {
-        if (request.type === 'CANCELLATION') {
-            return request.originGroupId || '';
-        }
-        if (request.type === 'JOIN') {
-            return request.destinationGroupId || '';
-        }
-        if (request.type === 'SWAP') {
-            return request.originGroupId || request.destinationGroupId || '';
-        }
-        return '';
-    };
-
-    const handleGroupSelect = (value: string) => {
-        if (request.type === 'CANCELLATION') {
-            handleUpdate('originGroupId', value || null);
-        } else if (request.type === 'JOIN') {
-            handleUpdate('destinationGroupId', value || null);
-        } else if (request.type === 'SWAP') {
-
-            if (!request.originGroupId) {
-                handleUpdate('originGroupId', value || null);
-            } else {
-                handleUpdate('destinationGroupId', value || null);
-            }
-        }
-    };
-
     return (
         <form className="flex flex-col gap-5 text-sm w-full">
             {/* Tipo de Solicitud */}

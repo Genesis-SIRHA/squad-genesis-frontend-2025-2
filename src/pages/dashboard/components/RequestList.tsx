@@ -1,5 +1,3 @@
-// RequestList.tsx
-import { useState } from "react";
 import RequestCard from "./requestCard/RequestCard.tsx";
 
 interface RequestListProps {
@@ -25,16 +23,11 @@ const RequestList = ({
                          onRejectRequest,
                          userRole
                      }: RequestListProps) => {
-    const [isCreating, setIsCreating] = useState(false);
-    const [newRequest, setNewRequest] = useState<any>(null);
 
     const handleCreateClick = () => {
         onCreateRequest();
     };
 
-    const handleSaveNewRequest = (request: any) => {
-        onSaveRequest(request);
-    };
 
     const handleCancelCreate = () => {
         onCancelCreate();
