@@ -13,7 +13,6 @@ export const usePensumByUserId = (studentId: string) => {
             const response = await apiClient.get<Pensum>(`/pemsum/${studentId}/respond`);
             const validatedData = PensumSchema.parse(response.data);
             setPensum(validatedData);
-            console.log("Pensum que ha llegado a front", validatedData);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {

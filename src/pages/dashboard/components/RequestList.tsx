@@ -1,4 +1,4 @@
-import RequestCard from "./RequestCard.tsx";
+import RequestCard from "./requestCard/RequestCard.tsx";
 
 const RequestList = ({requests, activeRequestId, toggleRequest}: any) => (
     <div className="rounded-t-3xl bg-primary-smoke shadow-sm min-h-full h-auto">
@@ -17,8 +17,7 @@ const RequestList = ({requests, activeRequestId, toggleRequest}: any) => (
                         request={request}
                         isActive={activeRequestId === request.requestId}
                         onToggle={() => toggleRequest(request.requestId)}
-                        editable={false}
-                    />
+                        editable={false} mode={"create"}                    />
                 ))
             ) : (
                 <p className="text-center py-4">No hay solicitudes disponibles</p>
