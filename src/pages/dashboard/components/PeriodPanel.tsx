@@ -20,6 +20,12 @@ const RequestPeriodPanel = ({ period }: Props) => {
         }
     }, [period]);
 
+    if (!period) {
+        return null;
+    }
+
+    const formattedDate = new Date(period.initialDate).toLocaleDateString();
+
     return (
         <div className="flex flex-col h-full w-1/3 bg-customGradient rounded-xl shadow-sm p-6 items-center justify-center">
             <div className="text-primary-smoke text-3xl font-bold mb-4 text-center">Fechas de solicitud</div>
@@ -34,7 +40,7 @@ const RequestPeriodPanel = ({ period }: Props) => {
 
             {period && (
                 <div className="mt-4 text-xs text-primary-smoke">
-                    Desde <strong>{period.initialDate.toLocaleDateString()}</strong> hasta{" "}
+                    Desde <strong>{formattedDate}</strong> hasta{" "}
                     <strong>{period.finalDate.toLocaleDateString()}</strong>
                 </div>
             )}

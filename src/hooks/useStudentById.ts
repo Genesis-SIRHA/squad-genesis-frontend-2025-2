@@ -3,7 +3,7 @@ import axios from 'axios';
 import {type Student, StudentSchema} from '../schemas';
 import apiClient from "@/lib/interceptors/apiClient.ts";
 
-export const useStudentByUserId = (studentId: string) => {
+export const useStudentById = (studentId: string) => {
     const [student, setStudent] = useState<Student | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -13,6 +13,8 @@ export const useStudentByUserId = (studentId: string) => {
                 setLoading(true);
                 const response = await apiClient.get<Student>(`/student/${studentId}`);
                 const validatedData = StudentSchema.parse(response.data);
+                console.log("validate date");
+                console.log(validatedData);
                 setStudent(validatedData);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
@@ -36,6 +38,7 @@ export const useStudentByUserId = (studentId: string) => {
             const validatedData = StudentSchema.parse(response.data);
             setStudent(validatedData);
         } catch {
+            console.log("error refetch");
             setStudent(null);
         } finally {
             setLoading(false);
@@ -45,4 +48,4 @@ export const useStudentByUserId = (studentId: string) => {
     return {student, loading, refetch};
 };
 
-export default useStudentByUserId;
+export default useStudentById;
