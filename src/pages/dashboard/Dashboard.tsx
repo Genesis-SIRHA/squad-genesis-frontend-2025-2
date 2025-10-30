@@ -25,7 +25,7 @@ const Dashboard = () => {
     const userId = user?.userId || 'invalid';
     const role = user?.role || 'invalid';
 
-    const { requests, loading } = useRequestByUserId(userId, role);
+    const { requests, loading, refetch } = useRequestByUserId(userId, role);
 
     const handleCreateRequest = () => {
         setIsCreating(true);
@@ -40,11 +40,45 @@ const Dashboard = () => {
             requestId: `temp-${Date.now()}`,
             studentId: userId,
             createdAt: new Date().toISOString(),
-            status: 'pending'
+            status: 'pending' as RequestStatus
         };
+
+        // Aquí iría la llamada a tu API para guardar la solicitud
+        // await saveRequestToAPI(requestToSave);
 
         setIsCreating(false);
         toast.success("Solicitud creada exitosamente");
+        refetch(); // Recargar las solicitudes
+    };
+
+    const handleSaveExistingRequest = (updatedRequest: Request) => {
+        console.log('Actualizando solicitud:', updatedRequest);
+
+        // Aquí iría la llamada a tu API para actualizar la solicitud
+        // await updateRequestInAPI(updatedRequest);
+
+        toast.success("Solicitud actualizada exitosamente");
+        refetch(); // Recargar las solicitudes
+    };
+
+    const handleAcceptRequest = (requestId: string) => {
+        console.log('Aceptando solicitud:', requestId);
+
+        // Aquí iría la llamada a tu API para aceptar la solicitud
+        // await acceptRequestInAPI(requestId);
+
+        toast.success("Solicitud aceptada");
+        refetch(); // Recargar las solicitudes
+    };
+
+    const handleRejectRequest = (requestId: string) => {
+        console.log('Rechazando solicitud:', requestId);
+
+        // Aquí iría la llamada a tu API para rechazar la solicitud
+        // await rejectRequestInAPI(requestId);
+
+        toast.success("Solicitud rechazada");
+        refetch(); // Recargar las solicitudes
     };
 
     const handleCancelCreation = () => {
@@ -72,41 +106,50 @@ const Dashboard = () => {
 
             {/* Mostrar RequestCard en modo creación */}
             {isCreating && (
-                <RequestCard
-                    request={{
-                        requestId: 'temp-id',
-                        studentId: userId,
-                        type: 'SWAP' as RequestStatus,
-                        status: 'pending',
-                        createdAt: new Date(),
-                        isExceptional: false,
-                        destinationGroupId: null,
-                        originGroupId: null,
-                        description: '',
-                        gestedBy: null,
-                        answerAt: null,
-                        answer: null,
-                    }}
-                    isActive={true}
-                    onToggle={handleCancelCreation}
-                    mode="create"
-                    onSave={handleSaveNewRequest}
-                    onCancel={handleCancelCreation}
-                />
+                <div className="mb-6">
+                    <RequestCard
+                        request={{
+                            requestId: 'temp-id',
+                            studentId: userId,
+                            type: 'SWAP' as RequestStatus,
+                            status: 'pending' as RequestStatus,
+                            createdAt: new Date(),
+                            isExceptional: false,
+                            destinationGroupId: null,
+                            originGroupId: null,
+                            description: '',
+                            gestedBy: null,
+                            answerAt: null,
+                            answer: null,
+                        }}
+                        isActive={true}
+                        onToggle={() => {}} // No hacer nada al toggle en modo creación
+                        mode="create"
+                        onSave={handleSaveNewRequest}
+                        onCancel={handleCancelCreation}
+                    />
+                </div>
             )}
 
             <RequestList
                 requests={requests}
                 activeRequestId={activeRequestId}
                 toggleRequest={toggleRequest}
+                onCreateRequest={handleCreateRequest}
+                onSaveRequest={handleSaveExistingRequest}
+                onCancelCreate={handleCancelCreation}
+                onAcceptRequest={handleAcceptRequest}
+                onRejectRequest={handleRejectRequest}
+                userRole={role as 'student' | 'teacher'}
             />
 
-            {!isCreating && (
+            {/* Botón flotante de crear solo para estudiantes */}
+            {role === 'student' && !isCreating && (
                 <Button
-                    className="flex items-center justify-center fixed w-15 h-15 bottom-20 right-20 z-10 bg-customGradient rounded-full text-white"
+                    className="flex items-center justify-center fixed w-15 h-15 bottom-20 right-20 z-10 bg-customGradient rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={handleCreateRequest}
                 >
-                    <PlusIcon />
+                    <PlusIcon className="w-6 h-6" />
                 </Button>
             )}
         </div>

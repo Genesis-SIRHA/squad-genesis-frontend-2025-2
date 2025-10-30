@@ -1,3 +1,4 @@
+// RequestHeader.tsx - Versión mejorada
 import { ChevronDown } from "lucide-react";
 import { Button } from "@headlessui/react";
 
@@ -12,6 +13,8 @@ interface RequestHeaderProps {
     onEditToggle?: () => void;
     onSave?: () => void;
     onCancel?: () => void;
+    onAccept?: () => void;
+    onReject?: () => void;
     mode: 'create' | 'view' | 'respond';
 }
 
@@ -26,6 +29,8 @@ const RequestHeader = ({
                            onEditToggle,
                            onSave,
                            onCancel,
+                           onAccept,
+                           onReject,
                            mode
                        }: RequestHeaderProps) => {
     const formatDate = (date: Date | string): string => {
@@ -77,7 +82,9 @@ const RequestHeader = ({
             </button>
 
             <div className="flex w-1/2">
-                <p className="text-primary-mate w-5/12">{courseName || (mode === 'create' ? 'Nueva Solicitud' : 'loading...')}</p>
+                <p className="text-primary-mate w-5/12">
+                    {courseName || (mode === 'create' ? 'Nueva Solicitud' : 'Cargando...')}
+                </p>
             </div>
 
             <div className="flex justify-center w-1/6">
@@ -106,7 +113,7 @@ const RequestHeader = ({
                     <div className="flex gap-2">
                         <Button
                             onClick={onSave}
-                            className="px-4 py-2 bg-secondary-success text-white rounded-lg text-sm font-medium hover:bg-secondary-success transition-colors"
+                            className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
                         >
                             Crear
                         </Button>
@@ -123,7 +130,7 @@ const RequestHeader = ({
                             <>
                                 <Button
                                     onClick={onSave}
-                                    className="px-4 py-2 bg-secondary-success text-white rounded-lg text-sm font-medium hover:bg-secondary-success transition-colors"
+                                    className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
                                 >
                                     Guardar
                                 </Button>
@@ -142,6 +149,21 @@ const RequestHeader = ({
                                 Editar
                             </Button>
                         )}
+                    </div>
+                ) : mode === 'respond' && status === 'PENDING' ? (
+                    <div className="flex gap-2">
+                        <Button
+                            onClick={onAccept}
+                            className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
+                        >
+                            Aceptar
+                        </Button>
+                        <Button
+                            onClick={onReject}
+                            className="px-4 py-2 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
+                        >
+                            Rechazar
+                        </Button>
                     </div>
                 ) : null}
             </div>

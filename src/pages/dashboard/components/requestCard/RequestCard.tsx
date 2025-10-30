@@ -1,3 +1,4 @@
+// RequestCard.tsx - Versión mejorada
 import { useState } from "react";
 import RequestHeader from "@/pages/dashboard/components/requestCard/components/RequestHeader.tsx";
 import RequestBody from "@/pages/dashboard/components/requestCard/components/RequestBody.tsx";
@@ -13,9 +14,20 @@ interface RequestCardProps {
     mode: 'create' | 'view' | 'respond';
     onSave?: (request: Request) => void;
     onCancel?: () => void;
+    onAccept?: (requestId: string) => void;
+    onReject?: (requestId: string) => void;
 }
 
-const RequestCard = ({ request, isActive, onToggle, mode, onSave, onCancel }: RequestCardProps) => {
+const RequestCard = ({
+                         request,
+                         isActive,
+                         onToggle,
+                         mode,
+                         onSave,
+                         onCancel,
+                         onAccept,
+                         onReject
+                     }: RequestCardProps) => {
     const [editableRequest, setEditableRequest] = useState<Request>(request);
     const [isEditing, setIsEditing] = useState(mode === 'create');
     const [viewSchedule, setViewSchedule] = useState(true);
@@ -57,6 +69,18 @@ const RequestCard = ({ request, isActive, onToggle, mode, onSave, onCancel }: Re
         setIsEditing(!isEditing);
     };
 
+    const handleAccept = () => {
+        if (onAccept) {
+            onAccept(request.requestId);
+        }
+    };
+
+    const handleReject = () => {
+        if (onReject) {
+            onReject(request.requestId);
+        }
+    };
+
     return (
         <div className="flex flex-col">
             <RequestHeader
@@ -70,6 +94,8 @@ const RequestCard = ({ request, isActive, onToggle, mode, onSave, onCancel }: Re
                 onEditToggle={handleEditToggle}
                 onSave={handleSave}
                 onCancel={handleCancel}
+                onAccept={handleAccept}
+                onReject={handleReject}
                 mode={mode}
             />
 

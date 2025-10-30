@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: 'https://sirha-sandbox-h8dyhxepehd4hugq.canadacentral-01.azurewebsites.net/api',
 });
 
 apiClient.interceptors.request.use((config) => {
